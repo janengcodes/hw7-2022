@@ -42,14 +42,16 @@ document.querySelector("#skip").addEventListener("click", function() {
 })
 
 document.querySelector("#mute").addEventListener("click", function() {
-	if (video.volume == 0) {
+	if (video.volume == 0) { // unmute
 		const vol = document.querySelector("#slider").value;
 		video.volume = vol/100;
 		console.log(vol);
+		document.querySelector('#mute').innerHTML = 'Mute';
 	}
-	else {
+	else { // mute
 		video.volume = 0;
 		console.log(video.volume);
+		document.querySelector('#mute').innerHTML = 'Unmute';
 	}
 })
 
