@@ -1,6 +1,8 @@
 var video = document.querySelector("#player1");
 
 window.addEventListener("load", function() {
+	console.log("Good job on opening the window");
+	video.load();
 	video.autoplay = false;
 	video.loop = false;
 });
@@ -10,7 +12,7 @@ document.querySelector("#play").addEventListener("click", function() {
 	const vol = document.querySelector("#slider").value;
 	video.volume = vol/100;
 	const volText = document.querySelector("#volume");
-	volText.innerHTML = `${vol}`;
+	volText.innerHTML = `${vol}` + "%";
 });
 
 document.querySelector("#pause").addEventListener("click", function() {
@@ -24,8 +26,7 @@ document.querySelector("#slower").addEventListener("click", function() {
 });
 
 document.querySelector("#faster").addEventListener( "click", function() {
-	let initRate = video.playbackRate;
-	video.playbackRate = 1.1 * initRate;
+	video.playbackRate = video.playbackRate/0.9;
 	console.log(video.playbackRate);
 })
 
@@ -34,22 +35,21 @@ document.querySelector("#skip").addEventListener("click", function() {
 	let newTime = video.currentTime + 10;
 	if (newTime > videoLength) {
 		video.currentTime = 0;
+		console.log(video.currentTime);
 	}
 	else {
 		video.currentTime = newTime;
+		console.log(video.currentTime);
 	}
-	console.log(video.currentTime);
 })
 
 document.querySelector("#mute").addEventListener("click", function() {
 	if (video.volume == 0) { // unmute
-		const vol = document.querySelector("#slider").value;
-		video.volume = vol/100;
-		console.log(vol);
+		video.muted = false;
 		document.querySelector('#mute').innerHTML = 'Mute';
 	}
 	else { // mute
-		video.volume = 0;
+		video.muted = true;
 		console.log(video.volume);
 		document.querySelector('#mute').innerHTML = 'Unmute';
 	}
@@ -59,7 +59,7 @@ document.querySelector("#slider").addEventListener("click", function() {
 	const vol = document.querySelector("#slider").value;
 	video.volume = vol/100;
 	const volText = document.querySelector("#volume");
-	volText.innerHTML = `${vol}`;
+	volText.innerHTML = `${vol}` + "%";
 })
 
 document.querySelector("#vintage").addEventListener("click", function() { 
